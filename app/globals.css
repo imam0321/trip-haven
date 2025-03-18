@@ -53,11 +53,11 @@
   }
 
   .login-form {
-    @apply flex flex-col my-6;
+    @apply flex flex-col my-5;
   }
 
   .login-form div {
-    @apply flex flex-col gap-2 my-2;
+    @apply flex flex-col gap-1 my-1;
   }
 
   .login-form input {
