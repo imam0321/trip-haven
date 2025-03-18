@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="mt-20">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );
