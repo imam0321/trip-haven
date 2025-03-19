@@ -6,4 +6,5 @@ Trip Haven is a hotel booking web application
 
 - Next.js
 - Tailwind CSS
-- MongoDB
+- Mongoose
+- Next Auth

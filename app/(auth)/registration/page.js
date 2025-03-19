@@ -7,7 +7,7 @@ export default function RegistrationPage() {
       <div className="max-w-[450px] w-full mx-auto p-4 border border-gray-700/20 rounded-md">
         <h4 className="font-bold text-2xl">Sign Up</h4>
         <RegistrationForm />
-        <SocialLogins />
+        <SocialLogins mode={"registration"}/>
       </div>
     </section>
   );

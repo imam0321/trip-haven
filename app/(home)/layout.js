@@ -15,8 +15,8 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "Trip Haven - Home",
-  description: "Trip Haven Home Page",
+  title: "TripHaven - Home",
+  description: "One Place for Hospitality",
 };
 
 export default async function RootLayout({ children }) {
