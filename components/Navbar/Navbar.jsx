@@ -1,6 +1,9 @@
+import { auth } from "@/auth"
 import Link from "next/link"
+import Logout from "../Auth/Logout/Logout";
 
-export default function Navbar({ sideMenu }) {
+export default async function Navbar({ sideMenu }) {
+  const session = await auth();
   return (
     <nav>
       <Link href="/">
@@ -25,7 +28,18 @@ export default function Navbar({ sideMenu }) {
           </li>
 
           <li>
-            <Link href="/login" className="login">Login</Link>
+            {
+              session?.user ? (
+                <div>
+                  <span>{session?.user?.name}</span>
+                  <span> | </span>
+                  <Logout />
+                </div>
+              ) : (
+                <Link href="/login" className="login">Login</Link>
+              )
+            }
+
           </li>
         </ul>
       )}
