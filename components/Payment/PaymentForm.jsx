@@ -1,6 +1,12 @@
+import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 
-export default function PaymentForm() {
+export default async function PaymentForm() {
+  const session = await auth();
+  if (!session) {
+    redirect('/login')
+  }
   return (
     <form className="my-8">
       <div className="my-4 space-y-2">

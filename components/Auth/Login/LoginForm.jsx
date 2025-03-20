@@ -1,12 +1,14 @@
 'use client'
 
 import { login } from "@/app/actions";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react"
 
 export default function LoginForm() {
   const [error, setError] = useState(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const redirectTo = searchParams.get("redirect") || "/bookings";
 
   const onSubmit = async (event) => {
     event.preventDefault();
@@ -15,7 +17,7 @@ export default function LoginForm() {
       const response = await login(formData);
 
       if (!response.error) {
-        router.push("/bookings")
+        router.push(redirectTo);
       } else {
         setError(response.error.message);
       }
