@@ -1,18 +1,18 @@
 import Image from "next/image";
 import HotelSummaryInfo from "../HotelSummaryInfo/HotelSummaryInfo";
 
-
-export default function HotelCard() {
+export default function HotelCard({ hotelInfo }) {
   return (
     <div className="flex gap-6 border border-gray/20 p-4 rounded-md">
       <Image
-        src="/image-1.png"
+        src={hotelInfo?.thumbNailUrl}
         className="max-h-[162px] max-w-[240px]"
         height={162}
         width={240}
-        alt="hotel"
+        alt={hotelInfo?.name}
       />
-      <HotelSummaryInfo fromListPage={true} />
+      <HotelSummaryInfo fromListPage={true} info={hotelInfo} />
     </div>
   )
 }
+
