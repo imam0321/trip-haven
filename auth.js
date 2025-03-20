@@ -4,6 +4,7 @@ import CredentialProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import mongoClientPromise from "./database/mongoClientPromise/mongoClientPromise";
 import { userModel } from "./models/user-model";
+import bcrypt from "bcryptjs";
 
 export const {
   handlers: { GET, POST },
@@ -29,7 +30,7 @@ export const {
           throw new Error("User not found! Please register first.");
         }
 
-        const isMatch = credentials.password === user.password;
+        const isMatch = await bcrypt.compare(credentials.password, user?.password);
         if (!isMatch) {
           throw new Error("Incorrect password! Try again.");
         }
