@@ -1,16 +1,18 @@
+import Image from "next/image";
 
 
-export default function Gallery() {
+export default function Gallery({ gallery }) {
+  const newGallery = [...gallery];
+  newGallery.shift();
   return (
     <section className="container">
       <div className="grid grid-cols-2 imageshowCase">
-        <img src="./assets/images/1.png" className="h-[400px]" alt="" />
+        <Image src={gallery[0]} className="h-[400px]" height={400} width={400} alt="Main Picture" />
 
         <div className="grid grid-cols-2 grid-rows-2 h-[400px]">
-          <img src="./assets/images/2.png" alt="" />
-          <img src="./assets/images/3.png" alt="" />
-          <img src="./assets/images/4.png" alt="" />
-          <img src="./assets/images/5.png" alt="" />
+          {
+            newGallery.map(image => <Image key={image} src={image} height={400} width={400} alt="Sub Picture" />)
+          }
         </div>
       </div>
     </section>
