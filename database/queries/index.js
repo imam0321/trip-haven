@@ -1,8 +1,10 @@
 import { ratingModel } from "@/models/rating-model";
 import { reviewModel } from "@/models/review-model";
-
-const { hotelModel } = require("@/models/hotels-model");
-const { replaceMongoIdInArray } = require("@/utils/data-util");
+import { hotelModel } from "@/models/hotels-model";
+import {
+  replaceMongoIdInArray,
+  replaceMongoIdInObject,
+} from "@/utils/data-util";
 
 export async function getAllHotels() {
   try {
@@ -21,6 +23,11 @@ export async function getAllHotels() {
   } catch (error) {
     console.log(error);
   }
+}
+
+export async function getHotelById(hotelId) {
+  const hotel = await hotelModel.findById(hotelId).lean();
+  return replaceMongoIdInObject(hotel);
 }
 
 export async function getRatingsForHotel(hotelId) {
