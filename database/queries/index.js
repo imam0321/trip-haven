@@ -6,7 +6,7 @@ import {
   replaceMongoIdInObject,
 } from "@/utils/data-util";
 
-export async function getAllHotels() {
+export async function getAllHotels(destination, checkIn, checkout) {
   try {
     const hotels = await hotelModel
       .find()
