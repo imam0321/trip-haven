@@ -57,6 +57,7 @@ async function findBooking(hotelId, checkIn, checkout) {
       isDateInBetween(checkout, match.checkIn, match.checkout)
     );
   });
+  return found;
 }
 
 export async function getHotelById(hotelId, checkIn, checkout) {

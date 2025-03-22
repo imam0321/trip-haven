@@ -71,6 +71,6 @@
     @apply bg-gray-700 cursor-default;
   }
   .btn-disabled{
-    @apply bg-gray-700 cursor-default;
+    @apply bg-gray-700 cursor-default px-8 py-2 rounded-md block text-white font-bold shadow-lg hover:shadow-primary/50 active:scale-95 transition-all;
   }
 }
