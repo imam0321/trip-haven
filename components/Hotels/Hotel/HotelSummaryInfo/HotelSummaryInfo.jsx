@@ -3,9 +3,15 @@ import HotelRating from "../HotelRating/HotelRating"
 import Link from "next/link";
 
 
-export default async function HotelSummaryInfo({ fromListPage, info }) {
-  const { id, name, city, highRate, lowRate, propertyCategory } = info
+export default async function HotelSummaryInfo({ fromListPage, info, checkIn, checkout }) {
+
+  const { id, name, city, highRate, lowRate, propertyCategory, isBooked } = info
   const reviews = await getReviewForHotel(id);
+
+  let params = "";
+  if (checkIn && checkout) {
+    params = `?checkIn=${checkIn}&checkout=${checkout}`
+  }
 
   return (
     <>
@@ -17,6 +23,9 @@ export default async function HotelSummaryInfo({ fromListPage, info }) {
           {
             reviews?.length === 0 ? <Link href="#" className="underline">Be the first one to review</Link> : <Link href={`/hotel/${id}/reviews`} className="underline">{reviews.length} Reviews</Link>
           }
+          {
+            isBooked && <span className="underline">Sold Out</span>
+          }
         </div>
         <div><span className="bg-yellow-400 p-1 rounded-md">{propertyCategory} Star property</span></div>
       </div>
@@ -25,7 +34,7 @@ export default async function HotelSummaryInfo({ fromListPage, info }) {
         <h2 className="text-2xl font-bold text-right">${(highRate + lowRate) / 2}/night</h2>
         <p className=" text-right">Per Night for 4 Rooms</p>
         {
-          fromListPage ? (<Link href={`/hotels/${id}`} className="btn-primary ">Details</Link>) : (<button className="btn-primary ">Book</button>)
+          fromListPage ? (<Link href={`/hotels/${id}${params}`} className="btn-primary ">Details</Link>) : (<button className={isBooked ? "btn-disabled" : "btn-primary"}>Book</button>)
         }
       </div>
     </>

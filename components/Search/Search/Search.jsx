@@ -4,7 +4,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 
 export default function Search({ fromList, destination, checkIn, checkout }) {
-  const cities = ["Puglia", "Catania", "Palermo", "Frejus", "Paris"];
+  const cities = ["Puglia", "Catania", "Kerkira", "Frejus", "Paris"];
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
