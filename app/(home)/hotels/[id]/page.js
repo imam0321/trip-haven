@@ -10,7 +10,7 @@ export default async function HotelDetailsPage({
   const hotelInfo = await getHotelById(id, checkIn, checkout);
   return (
     <>
-      <Summary hotelInfo={hotelInfo} />
+      <Summary hotelInfo={hotelInfo} checkIn={checkIn} checkout={checkout} />
       <Gallery gallery={hotelInfo?.gallery} />
       <Overview overview={hotelInfo?.overview} />
     </>

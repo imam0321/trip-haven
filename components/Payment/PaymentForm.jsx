@@ -1,12 +1,8 @@
-import { auth } from "@/auth";
-import { redirect } from "next/navigation";
 
 
-export default async function PaymentForm() {
-  const session = await auth();
-  if (!session) {
-    redirect('/login')
-  }
+
+export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, checkout, cost }) {
+
   return (
     <form className="my-8">
       <div className="my-4 space-y-2">
@@ -16,6 +12,7 @@ export default async function PaymentForm() {
         <input
           type="text"
           id="name"
+          value={loggedUser?.name}
           className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"
         />
       </div>
@@ -27,6 +24,7 @@ export default async function PaymentForm() {
         <input
           type="email"
           id="email"
+          value={loggedUser?.email}
           className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"
         />
       </div>
@@ -34,14 +32,14 @@ export default async function PaymentForm() {
       <div className="my-4 space-y-2">
         <span>Check in</span>
         <h4 className="mt-2">
-          <input type="date" name="checkin" id="checkin" />
+          <input type="date" name="checkIn" id="checkIn" value={checkIn} />
         </h4>
       </div>
 
       <div className="my-4 space-y-2">
         <span>Checkout</span>
         <h4 className="mt-2">
-          <input type="date" name="checkout" id="checkout" />
+          <input type="date" name="checkout" id="checkout" value={checkout} />
         </h4>
       </div>
 
@@ -79,7 +77,7 @@ export default async function PaymentForm() {
       </div>
 
       <button type="submit" className="btn-primary w-full">
-        Pay Now ($10)
+        Pay Now (${cost})
       </button>
     </form>
   )

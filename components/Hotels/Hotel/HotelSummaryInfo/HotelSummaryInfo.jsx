@@ -34,7 +34,7 @@ export default async function HotelSummaryInfo({ fromListPage, info, checkIn, ch
         <h2 className="text-2xl font-bold text-right">${(highRate + lowRate) / 2}/night</h2>
         <p className=" text-right">Per Night for 4 Rooms</p>
         {
-          fromListPage ? (<Link href={`/hotels/${id}${params}`} className="btn-primary ">Details</Link>) : (<button className={isBooked ? "btn-disabled" : "btn-primary"}>Book</button>)
+          fromListPage ? (<Link href={`/hotels/${id}${params}`} className="btn-primary ">Details</Link>) : (<Link href={isBooked ? "#" : `/hotels/${id}/payment${params}` } className={isBooked ? "btn-disabled" : "btn-primary"}>{isBooked ? "Booked" : "Book"}</Link>)
         }
       </div>
     </>

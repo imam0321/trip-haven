@@ -7,6 +7,7 @@ import {
   replaceMongoIdInObject,
 } from "@/utils/data-util";
 import { bookingModel } from "@/models/booking-model";
+import { userModel } from "@/models/user-model";
 
 export async function getAllHotels(destination, checkIn, checkout) {
   try {
@@ -83,4 +84,9 @@ export async function getRatingsForHotel(hotelId) {
 export async function getReviewForHotel(hotelId) {
   const reviews = await reviewModel.find({ hotelId: hotelId }).lean();
   return replaceMongoIdInArray(reviews);
+}
+
+export async function getUserByEmail(email) {
+  const users = await userModel.find({ email: email }).lean();
+  return replaceMongoIdInObject(users[0]);
 }
