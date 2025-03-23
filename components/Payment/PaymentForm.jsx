@@ -1,10 +1,44 @@
+'use client'
+
+import { useRouter } from "next/navigation"
+import { useState } from "react";
 
 
 
-export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, checkout, cost }) {
+export default function PaymentForm({ hotelInfo, loggedUser, checkIn, checkout, cost }) {
+  const router = useRouter();
+  const [error, setError] = useState("");
+
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const formData = new FormData(event.currentTarget)
+      const hotelId = hotelInfo?.id;
+      const userId = loggedUser?.id;
+      const checkIn = formData.get("checkIn");
+      const checkout = formData.get("checkout");
+
+      const response = await fetch("/api/auth/payment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          hotelId,
+          userId,
+          checkIn,
+          checkout
+        })
+      })
+
+      response.status === 201 && router.push("/bookings")
+    } catch (error) {
+      setError(error.message)
+    }
+  }
 
   return (
-    <form className="my-8">
+    <form className="my-8" onSubmit={onSubmit}>
       <div className="my-4 space-y-2">
         <label htmlFor="name" className="block">
           Name
@@ -12,7 +46,7 @@ export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, chec
         <input
           type="text"
           id="name"
-          value={loggedUser?.name}
+          defaultValue={loggedUser?.name}
           className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"
         />
       </div>
@@ -24,7 +58,7 @@ export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, chec
         <input
           type="email"
           id="email"
-          value={loggedUser?.email}
+          defaultValue={loggedUser?.email}
           className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"
         />
       </div>
@@ -32,14 +66,14 @@ export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, chec
       <div className="my-4 space-y-2">
         <span>Check in</span>
         <h4 className="mt-2">
-          <input type="date" name="checkIn" id="checkIn" value={checkIn} />
+          <input type="date" name="checkIn" id="checkIn" defaultValue={checkIn} />
         </h4>
       </div>
 
       <div className="my-4 space-y-2">
         <span>Checkout</span>
         <h4 className="mt-2">
-          <input type="date" name="checkout" id="checkout" value={checkout} />
+          <input type="date" name="checkout" id="checkout" defaultValue={checkout} />
         </h4>
       </div>
 
@@ -75,7 +109,7 @@ export default async function PaymentForm({ hotelInfo, loggedUser, checkIn, chec
           className="w-full border border-[#CCCCCC]/60 py-1 px-2 rounded-md"
         />
       </div>
-
+      {error && <p className="bg-red-500">{error}</p>}
       <button type="submit" className="btn-primary w-full">
         Pay Now (${cost})
       </button>
