@@ -1,5 +1,5 @@
 import HotelList from "@/components/Hotels/Hotel/HotelList/HotelList";
-import Filter from "@/components/Search/Filter/Filter";
+import AllFilter from "@/components/Search/Filter/AllFilter";
 import Search from "@/components/Search/Search/Search";
 
 export default function HotelListPage({
@@ -19,7 +19,7 @@ export default function HotelListPage({
       </section>
       <section className="py-12">
         <div className="container grid grid-cols-12">
-          <Filter />
+          <AllFilter />
           <HotelList
             destination={destination}
             checkIn={checkIn}

@@ -12,7 +12,7 @@ export default async function Navbar({ sideMenu }) {
       {sideMenu && (
         <ul>
           <li>
-            <Link href="#">Recommended Places</Link>
+            <Link href="/hotels">Recommended Places</Link>
           </li>
 
           <li>
