@@ -9,7 +9,7 @@ import {
 import { bookingModel } from "@/models/booking-model";
 import { userModel } from "@/models/user-model";
 
-export async function getAllHotels(destination, checkIn, checkout) {
+export async function getAllHotels(destination, checkIn, checkout, category) {
   try {
     const regex = new RegExp(destination, "i");
     const hotelsByDestination = await hotelModel
@@ -25,6 +25,13 @@ export async function getAllHotels(destination, checkIn, checkout) {
       .lean();
 
     let allHostels = hotelsByDestination;
+
+    if (category) {
+      const categoriesToMatch = category.split("|");
+      allHostels = allHostels.filter((hotel) => {
+        return categoriesToMatch.includes(hotel.propertyCategory.toString());
+      });
+    }
 
     if (checkIn && checkout) {
       allHostels = await Promise.all(
