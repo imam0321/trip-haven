@@ -9,7 +9,7 @@ export default async function HotelList({ destination, checkIn, checkout, catego
     <div className="col-span-9">
       <div className="space-y-4">
         {
-          allHotels > 0 ? (
+          allHotels.length > 0 ? (
             allHotels.map(hotel => <HotelCard
               key={hotel}
               hotelInfo={hotel}
